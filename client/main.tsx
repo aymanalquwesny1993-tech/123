@@ -1,12 +1,14 @@
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
+declare global {
+  var __root: ReturnType<typeof createRoot> | undefined;
+}
+
 const container = document.getElementById("root");
 if (!container) throw new Error("Root element not found");
 
-let root = (container as any)._reactRootContainer;
-if (!root) {
-  root = createRoot(container);
-  (container as any)._reactRootContainer = root;
+if (!globalThis.__root) {
+  globalThis.__root = createRoot(container);
 }
-root.render(<App />);
+globalThis.__root.render(<App />);
