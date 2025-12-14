@@ -81,7 +81,7 @@ export const getTableStructure = (totalPlayers: number) => {
 export const generatePairings = (
   players: Player[],
   structure: any,
-  pastPairings: Round[] = []
+  pastPairings: Round[] = [],
 ) => {
   let slots = [];
   for (let i = 0; i < structure[5]; i++) slots.push(5);
@@ -201,7 +201,7 @@ export const fetchGeminiContent = async (payload: any) => {
       console.error(`Gemini API call failed (Attempt ${i + 1}):`, error);
       if (i === maxRetries - 1) {
         throw new Error(
-          "Failed to connect to Gemini API after multiple retries."
+          "Failed to connect to Gemini API after multiple retries.",
         );
       }
     }

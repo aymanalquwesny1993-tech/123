@@ -20,7 +20,9 @@ export default function TournamentCompletedModal({
   onNewTournament,
   onViewStandings,
 }: TournamentCompletedModalProps) {
-  const [summaryReport, setSummaryReport] = useState<SummaryReport | null>(null);
+  const [summaryReport, setSummaryReport] = useState<SummaryReport | null>(
+    null,
+  );
   const [summaryLoading, setSummaryLoading] = useState(false);
 
   const handleGenerateSummary = async () => {
@@ -76,7 +78,9 @@ export default function TournamentCompletedModal({
             <div
               key={p.id}
               className={`p-3 rounded-lg flex items-center justify-between ${
-                idx === 0 ? "bg-yellow-100 border border-yellow-200" : "bg-gray-50"
+                idx === 0
+                  ? "bg-yellow-100 border border-yellow-200"
+                  : "bg-gray-50"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -125,7 +129,10 @@ export default function TournamentCompletedModal({
                   </p>
                   <ul className="text-xs space-y-1">
                     {summaryReport.sources.map((source, index) => (
-                      <li key={index} className="text-blue-500 hover:text-blue-700 truncate">
+                      <li
+                        key={index}
+                        className="text-blue-500 hover:text-blue-700 truncate"
+                      >
                         <a
                           href={source.uri}
                           target="_blank"

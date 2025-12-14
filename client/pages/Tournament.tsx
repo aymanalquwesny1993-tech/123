@@ -15,7 +15,7 @@ import {
 
 export default function Tournament() {
   const [phase, setPhase] = useState<"registration" | "active" | "completed">(
-    "registration"
+    "registration",
   );
   const [players, setPlayers] = useState<Player[]>([]);
   const [rounds, setRounds] = useState<Round[]>([]);
@@ -23,7 +23,8 @@ export default function Tournament() {
   const [activeTab, setActiveTab] = useState<"round" | "standings">("round");
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
-  const getPointsForRank = (rank: number) => POINTS[rank as keyof typeof POINTS] || 0;
+  const getPointsForRank = (rank: number) =>
+    POINTS[rank as keyof typeof POINTS] || 0;
 
   const calculateTotalScores = () => {
     const scores: { [key: string]: number } = {};
@@ -34,7 +35,8 @@ export default function Tournament() {
         table.players.forEach((player) => {
           const rank = table.scores[player.id];
           if (rank) {
-            scores[player.id] = (scores[player.id] || 0) + getPointsForRank(rank);
+            scores[player.id] =
+              (scores[player.id] || 0) + getPointsForRank(rank);
           }
         });
       });
@@ -74,7 +76,7 @@ export default function Tournament() {
     roundIndex: number,
     tableId: string,
     playerId: string,
-    rank: string
+    rank: string,
   ) => {
     const newRounds = [...rounds];
     const table = newRounds[roundIndex].tables.find((t) => t.id === tableId);
@@ -87,8 +89,8 @@ export default function Tournament() {
   const handleUpdateExtraPoints = (playerId: string, points: number) => {
     setPlayers(
       players.map((p) =>
-        p.id === playerId ? { ...p, extraPoints: points } : p
-      )
+        p.id === playerId ? { ...p, extraPoints: points } : p,
+      ),
     );
   };
 
@@ -102,7 +104,7 @@ export default function Tournament() {
     if (
       !allScored &&
       !window.confirm(
-        "WARNING: Not all players have been scored. Proceed anyway?"
+        "WARNING: Not all players have been scored. Proceed anyway?",
       )
     ) {
       return;
@@ -112,7 +114,10 @@ export default function Tournament() {
       const structure = getTableStructure(players.length);
       if (!structure) return;
       const newTables = generatePairings(players, structure, rounds);
-      setRounds([...rounds, { roundNum: currentRoundNum + 1, tables: newTables, isFinal: false }]);
+      setRounds([
+        ...rounds,
+        { roundNum: currentRoundNum + 1, tables: newTables, isFinal: false },
+      ]);
       setCurrentRoundNum(currentRoundNum + 1);
     } else if (currentRoundNum === 3) {
       const standings = calculateTotalScores();

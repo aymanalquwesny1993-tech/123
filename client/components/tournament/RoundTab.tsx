@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Shuffle, Trophy, Table as TableIcon, ArrowRight, Zap } from "lucide-react";
+import {
+  Shuffle,
+  Trophy,
+  Table as TableIcon,
+  ArrowRight,
+  Zap,
+} from "lucide-react";
 import {
   POINTS,
   ROUND_NAMES,
@@ -16,7 +22,7 @@ interface RoundTabProps {
     roundIndex: number,
     tableId: string,
     playerId: string,
-    rank: string
+    rank: string,
   ) => void;
   onUpdateExtraPoints: (playerId: string, points: number) => void;
   onNextRound: () => void;
@@ -55,7 +61,7 @@ export default function RoundTab({
       const tableDescriptions = round.tables
         .map(
           (t, i) =>
-            `Table ${i + 1} (${t.players.length} players): ${t.players.map((p) => p.name).join(", ")}`
+            `Table ${i + 1} (${t.players.length} players): ${t.players.map((p) => p.name).join(", ")}`,
         )
         .join("; ");
 
@@ -81,7 +87,7 @@ export default function RoundTab({
     } catch (e) {
       console.error("Hype text generation failed:", e);
       setHypeText(
-        "Failed to generate hype text. Please check your Gemini API key."
+        "Failed to generate hype text. Please check your Gemini API key.",
       );
     } finally {
       setHypeLoading(false);
@@ -141,7 +147,10 @@ export default function RoundTab({
             </div>
             <div className="p-4 space-y-3">
               {table.players.map((player) => (
-                <div key={player.id} className="flex items-center justify-between gap-4">
+                <div
+                  key={player.id}
+                  className="flex items-center justify-between gap-4"
+                >
                   <span className="font-medium text-gray-700 flex-1 truncate">
                     {player.name}
                   </span>
@@ -161,7 +170,7 @@ export default function RoundTab({
                           onChange={(e) =>
                             onUpdateExtraPoints(
                               player.id,
-                              parseFloat(e.target.value) || 0
+                              parseFloat(e.target.value) || 0,
                             )
                           }
                         />
@@ -175,7 +184,7 @@ export default function RoundTab({
                           roundIndex,
                           table.id,
                           player.id,
-                          e.target.value
+                          e.target.value,
                         )
                       }
                     >
